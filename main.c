@@ -5,7 +5,7 @@
 ** Login   <nathan.trehout@epitech.eu>
 ** 
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-** Last update Mon Dec 19 17:31:46 2016 Nathan Trehout
+** Last update Mon Dec 19 17:38:50 2016 Nathan Trehout
 */
 
 #include "include/my.h"
@@ -21,9 +21,10 @@ int	is_prefix(char *p)
     return (84);
 }
 
-int	write_in_file(char *path, char *to_write, char *prefix)
+int	init(char *path, char *to_write, char *prefix)
 {
-  
+  if (is_prefix(prefix) == 1)
+    write_sudo(
   
   return (0);
 }
