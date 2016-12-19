@@ -5,13 +5,22 @@
 ** Login   <nathan.trehout@epitech.eu>
 ** 
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-** Last update Mon Dec 19 16:50:41 2016 Nathan Trehout
+** Last update Mon Dec 19 17:06:05 2016 Joubert Miguel
 */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <ncurses.h>
+#include <stdlib.h>
+#include "include/my.h"
 
-
-int	main(int ac, char **av)
+int	main()
 {
-
+  char	*dest;
+  dest = malloc(sizeof(char) * 100);
+  retgetkey();
+  printf("%s\n", dest);
   return (0);
 }

@@ -4,7 +4,7 @@ NAME	=	Keylogger
 
 SRC	=	*.c
 
-LIB	=
+LIB	=	-lncurses
 
 CFLAGS	=	-I./includes/ -W -Wall -Wextra -pedantic
 
@@ -14,7 +14,7 @@ all	:	$(NAME)
 
 $(NAME)	:
 
-		$(CC) -o $(NAME) $(SRC) $(CFLAGS) -L lib -lmy
+		$(CC) -o $(NAME) $(SRC) $(CFLAGS) -L lib -lmy $(LIB)
 
 clean	:
 
