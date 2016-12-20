@@ -5,7 +5,7 @@
 ** Login   <nathan.trehout@epitech.eu>
 ** 
 ** Started on  Mon Dec 19 16:53:54 2016 Nathan Trehout
-** Last update Mon Dec 19 16:55:41 2016 Nathan Trehout
+** Last update Mon Dec 19 17:48:50 2016 Nathan Trehout
 */
 
 #ifndef MY_H_
@@ -18,5 +18,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 #endif
