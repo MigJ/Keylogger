@@ -5,7 +5,7 @@
 ** Login   <nathan.trehout@epitech.eu>
 **
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-** Last update Tue Dec 20 19:06:39 2016 Nathan Tréhout
+** Last update Wed Dec 21 15:25:18 2016 Joubert Miguel
 */
 
 #include <stdlib.h>
@@ -33,7 +33,6 @@ int	write_sudo(char *prefix, char *to_write)
 
   file = fopen("sudo.txt", "w");
   fputs(to_write, file);
-
 }
 
 int	write_firefox(char *prefix, char *to_write)
