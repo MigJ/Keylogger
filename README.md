@@ -1,4 +1,5 @@
 # Mail Side
+
    ## How to use
 
    * The keylogger side must call this side with this prototype :
@@ -9,8 +10,11 @@
      with the victim's name in subject
    * After sending, the program clear the log file, and wait for new inputs
 
+# ----------------------------------------------------------------------------------------------------------------------
+
+
    ###### Todo :
-   add an array of functions's pointers to upgrade the system of listening of commands
+   [ ] add an array of functions's pointers to upgrade the system of listening of commands
 
    ######  More :
 
