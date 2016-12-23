@@ -17,6 +17,6 @@
 
        	    - [ ] add an array of functions's pointers to upgrade the system of listening of commands
 
-   ######  More :
+###### More :
 
   * This program have been developped by me, and Miguel Joubert. *
