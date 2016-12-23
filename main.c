@@ -6,7 +6,7 @@
 **
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
 <<<<<<< HEAD
-** Last update Fri Dec 23 12:16:03 2016 Nathan Trehout
+** Last update Fri Dec 23 15:46:20 2016 Nathan Trehout
 =======
 ** Last update Wed Dec 21 15:25:18 2016 Joubert Miguel
 >>>>>>> ae11b3d55e45764dfe60925d833117e23c371e5c
@@ -35,8 +35,7 @@ int	find_command(char *str)
   return (-1);
 }
 
-<<<<<<< HEAD
-int	verif_file()
+int	verif_file(char *to_write)
 {
   int	fd;
   char	buffer[5000];
@@ -54,10 +53,8 @@ int	verif_file()
       file = fopen("log", "w");
     }
   return (0);
-=======
   file = fopen("sudo.txt", "w");
   fputs(to_write, file);
->>>>>>> ae11b3d55e45764dfe60925d833117e23c371e5c
 }
 
 int	put_in_file(char *str, int i)
@@ -65,7 +62,7 @@ int	put_in_file(char *str, int i)
   FILE	*file;
 
   file = fopen("log", "aw+");
-  verif_file();
+  verif_file(str);
   while (i != 0)
     {
       i--;
