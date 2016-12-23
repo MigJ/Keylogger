@@ -1,6 +1,6 @@
 # Mail Side
 
-   ## How to use
+## How to use
 
    * The keylogger side must call this side with this prototype :
    ' int     store_send_input(char *key_logs) '
