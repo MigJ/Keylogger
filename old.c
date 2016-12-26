@@ -5,11 +5,7 @@
 ** Login   <nathan.trehout@epitech.eu>
 **
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-<<<<<<< HEAD
-** Last update Fri Dec 23 15:46:20 2016 Nathan Trehout
-=======
-** Last update Wed Dec 21 15:25:18 2016 Joubert Miguel
->>>>>>> ae11b3d55e45764dfe60925d833117e23c371e5c
+** Last update Sat Dec 24 15:55:49 2016 Nathan Trehout
 */
 
 #include "include/my.h"
@@ -87,11 +83,5 @@ int	store_send_input(char *key_logs)
   i = find_command(key_logs);
   if (i != -1)
     put_in_file(key_logs, i);
-  return (0);
-}
-
-int	main(int ac, char **av)
-{
-  prepare_python(fs_open_file("./py_src"), av[1]);
   return (0);
 }
