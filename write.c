@@ -5,7 +5,11 @@
 ** Login   <nathan.trehout@epitech.eu>
 **
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-** Last update Sat Dec 24 15:55:49 2016 Nathan Trehout
+<<<<<<< HEAD
+** Last update Mon Dec 26 16:46:21 2016 Nathan Trehout
+=======
+** Last update Wed Dec 21 15:25:18 2016 Joubert Miguel
+>>>>>>> ae11b3d55e45764dfe60925d833117e23c371e5c
 */
 
 #include "include/my.h"
