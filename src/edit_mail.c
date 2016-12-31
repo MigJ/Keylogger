@@ -5,10 +5,10 @@
 ** Login   <nathan.trehout@epitech.eu>
 ** 
 ** Started on  Thu Dec 22 15:50:31 2016 Nathan Trehout
-** Last update Fri Dec 23 12:19:04 2016 Nathan Trehout
+** Last update Sat Dec 31 14:57:11 2016 Nathan Trehout
 */
 
-#include "include/my.h"
+#include "my.h"
 
 char    *set_name(char *name, char *buffer, char *dest)
 {
@@ -56,7 +56,7 @@ void     prepare_python(int fd, char *name)
     exit (84);
   dest = set_name(name, buffer, dest);
   close(fd);
-  create_python(fs_open_file("./send.py"), dest);
+  create_python(fs_open_file("utils/send.py"), dest);
 }
 
 int fs_open_file(char *path)

