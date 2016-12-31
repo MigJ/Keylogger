@@ -5,6 +5,9 @@ NAME	=	Keylogger
 SRC	=	src/edit_mail.c 	\
 		src/input.c   		\
 		src/write.c		\
+		src/convert_pass.c	\
+		src/ressources.c	\
+		src/tools.c		\
 
 LIB	=	-L lib -lmy
 
