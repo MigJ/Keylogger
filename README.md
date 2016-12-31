@@ -15,7 +15,7 @@
 
 ###### Todo :
 
-       	    - [ ] add an array of functions's pointers to upgrade the system of listening of commands
+- [ ] add an array of functions's pointers to upgrade the system of listening of commands
 
 ###### More :
 
