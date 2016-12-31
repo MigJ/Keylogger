@@ -5,7 +5,7 @@
 ** Login   <nathan.trehout@epitech.eu>
 ** 
 ** Started on  Thu Dec 22 15:50:31 2016 Nathan Trehout
-** Last update Sat Dec 31 14:57:11 2016 Nathan Trehout
+** Last update Sat Dec 31 15:18:49 2016 Nathan Trehout
 */
 
 #include "my.h"
@@ -51,7 +51,11 @@ void     prepare_python(int fd, char *name)
   char  *dest;
 
   dest = malloc(sizeof(char) * 5000);
+  if (dest == NULL)
+    exit (84);
   buffer = malloc(sizeof(char) * 5000);
+  if (buffer == NULL)
+    exit (84);
   if (read(fd, buffer, 5000) == 1)
     exit (84);
   dest = set_name(name, buffer, dest);
